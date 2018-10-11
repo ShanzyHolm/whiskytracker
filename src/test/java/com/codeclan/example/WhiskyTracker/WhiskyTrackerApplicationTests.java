@@ -32,12 +32,12 @@ public class WhiskyTrackerApplicationTests {
 		List <Whisky> foundWhiskies = whiskyRepository.getWhiskiesForParticularYear (1991);
 	}
 
-	@Test
-	public void canGetWhiskyFromRegion() {
-
-		Distillery distilleryRegion = distilleryRepository.findAllById (2L);
-		List <Whisky> regionalWhiskies = whiskyRepository.getWhiskiesForRegion (distilleryRegion);
-	}
+//	@Test
+//	public void canGetWhiskyFromRegion() {
+//
+//		Distillery distilleryRegion = distilleryRepository.findAllById (2L);
+//		List <Whisky> regionalWhiskies = whiskyRepository.getWhiskiesForRegion (distilleryRegion);
+//	}
 
 
 
