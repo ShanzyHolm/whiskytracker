@@ -1,5 +1,6 @@
 package com.codeclan.example.WhiskyTracker.repositories.WhiskyRepository;
 
+import com.codeclan.example.WhiskyTracker.models.Distillery;
 import com.codeclan.example.WhiskyTracker.models.Whisky;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -38,7 +39,29 @@ public class WhiskyRepositoryImpl implements WhiskyRepositoryCustom {
     }
 
 //  TODO:   * get all the whisky from a particular region
-//  TODO:   * get all the distilleries for a particular region
+
+    @Transactional
+    public List<Whisky> getWhiskiesForRegion(Distillery distillery) {
+        List<Whisky> regionalWhiskies = null;
+        Session session = entityManager.unwrap (Session.class);
+
+        try {
+            Criteria cr = session.createCriteria (Whisky.class);
+            cr.createAlias ("distilleries", "distillery");
+            cr.add (Restrictions.eq ("distillery.region", distillery.getRegion ()));
+            regionalWhiskies = cr.list ();
+        } catch (HibernateException e) {
+            e.printStackTrace ();
+        } finally {
+            session.close ();
+        }
+
+        return regionalWhiskies;
+    }
+
+//  WANT TO PASS IN REGION - getWhiskiesForRegion(String region) {
+
+
 //  TODO:   * get all the whisky from a particular distillery that's a specific age (if any)
 //  TODO:   * Get disilleries that have whiskies that are 12 years old
 }
